@@ -1,0 +1,69 @@
+<!-- product details -->
+
+
+	<div class="blog app-pages app-section">
+		<div class="container">
+			<div class="entry" ng-repeat="equipe in equipes">
+			<a href="/equipe/{{equipe.equipe_key}}" ng-if="pagina_minhas_equipes">
+			<a href="/equipe/{{equipe.$id}}" ng-else="pagina_minhas_equipes">
+				<img ng-src="img_dir/brasao_{{equipe.criador_uid}}.jpg" alt="{{equipe.nome}}">
+				<div class="user-date">
+					<ul>
+						<li><a href=""><i class="fa fa-user"></i> {{equipe.manager_nome}}</a></li>
+						<li><a href=""><i class="fa fa-clock-o"></i> {{equipe.criado| date:'d/M/yyyy HH:mm:ss'}}</a></li>
+					</ul>
+				</div>
+				<div class="content">
+					<h5><a href="">{{equipe.nome}}</a></h5>
+					<p>{{equipe.descricao}}</p>
+					<button class="button" ng-if="equipe.manager_uid == usuario_logado.providerData[0].uid" ng-click="get_infos()">Voce é o Manager dessa equipe !</button>
+				<div id="fb_img"></div>
+				<button class="button" ng-if="equipe.manager_uid != usuario_logado.providerData[0].uid">Quero entrar nessa equipe !</button>
+				</div>
+				</a>
+			</div>
+			
+			<div class="pagination">
+				<ul>
+					<li><a href="">Primeira</a></li>
+					<li class="active"><a href="">1</a></li>
+					<li><a href="">2</a></li>
+					<li><a href="">3</a></li>
+					<li><a href="">4</a></li>
+					<li><a href="">Ultima</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<!-- end product details -->
+	<script type="text/javascript">
+		$(function(){
+				'use-strict';
+
+				// sidenav control left
+				$(".sidenav-control").sideNav({
+					edge: 'left',
+					closeOnClick: false
+				});
+
+				// panel collapse icon
+				$(document).on("click",".collapsible-header",function(e){
+				    $(this).parent().siblings().find('span i').removeClass('fa-chevron-down')
+					$(this).find('span i').toggleClass('fa-chevron-down')
+				});
+
+
+				// faq collapse icon
+				$(document).on("click",".faq-collapsible",function(e){
+				    $(this).parent().siblings().find('i').removeClass('fa-minus')
+					$(this).find('i').toggleClass('fa-minus')
+				});
+
+
+
+				// tabs
+				$('ul.tabs').tabs(); 
+			  
+
+			});
+	</script>

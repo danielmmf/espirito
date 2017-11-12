@@ -1,0 +1,274 @@
+<style type="text/css">
+	
+.card{
+
+	border-radius: 50%;
+    margin: 5px 0 5px 0;
+    height: 60px;
+    width: 60px;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0),0 1px 5px 0 rgba(0, 0, 0, 0.24),0 3px 1px -2px rgba(0, 0, 0, 0);
+
+}
+
+</style>
+
+
+<div class="product-details app-pages app-section">
+<button class="button" ng-click="adicionar_jogador()">Adicionar novo jogador</button>
+<div id="fb_img"></div>
+
+
+<div ng-repeat="psn in meus_jogadores">PSN ID: {{psn.$id}}
+<div ng-repeat="(posicao ,posicoes) in psn">{{posicao}} - <button class="button" ng-if="jogador.equipe_id == 0">Entrar em um time</button>
+<div  ng-repeat="jogador in posicoes"><img ng-src="img_dir/avatar.jpg" class="card">{{jogador.nome}} - {{jogador.descricao}} - {{jogador.criado| date:'d/M/yyyy HH:mm:ss'}}</div><hr></div>
+
+
+</div>
+<!-- product details -->
+
+
+	<div class="product-details app-pages app-section">
+		<div class="container">
+			<img ng-src="img_dir/brasao_{{equipe.criador_uid}}.jpg" alt="{{equipe.nome}}">
+			<div class="details">
+				<h5>{{equipe.nome}}
+</h5>
+				<div class="rating">
+                    <span class="active"><i class="fa fa-star"></i></span>
+                    <span class="active"><i class="fa fa-star"></i></span>
+                    <span class="active"><i class="fa fa-star"></i></span>
+                    <span class="active"><i class="fa fa-star"></i></span>
+                    <span class="active"><i class="fa fa-star"></i></span>
+                </div>
+				<p>{{equipe.descricao}}
+				<br>
+				{{equipe.stats}}
+
+</p>
+				<div class="price"><h5>$20.000,00</h5></div>
+				<button class="button" ng-click="get_infos()">Atualizar Infos</button>{{array_imagens}}
+				<button class="button" ng-if="equipe.manager_uid == usuario_logado.providerData[0].uid" ng-click="jogar()">Jogar 2x2</button>
+				<button class="button" ng-if="equipe.manager_uid == usuario_logado.providerData[0].uid" ng-click="campanha()">Iniciar Campanha</button>
+				<div id="fb_img"></div>
+				<div ><img ng-src="{{imagem}}"></div>
+				<button class="button" ng-if="equipe.manager_uid != usuario_logado.providerData[0].uid" ng-click="solicitar()">Quero entrar nessa equipe !</button><button class="button" ng-click="solicitacao()">Quero entrar nessa equipe !(botão falso de teste)</button>{{equipe.manager_uid}}/{{usuario_logado.providerData[0].uid}}
+				
+			</div>
+			<div class="desc-review" ng-if="equipe.manager_uid == usuario_logado.providerData[0].uid">
+				<div class="row">
+					<div class="col s12">
+						<ul class="tabs">
+							<li class="tab col s4">
+								<a href="#solicitacoes"><h5>solicitacoes</h5></a>
+							</li>
+							<li class="tab col s4">
+								<a href="#description"><h5>Historico</h5></a>
+							</li>
+							<li class="tab col s4">
+								<a href="#review"><h5>Jogadores</h5></a>
+							</li>
+						</ul>
+					</div>
+					<div id="solicitacoes" class="col s12">
+
+						<div class="comment">
+							<div class="content" ng-repeat="solicitacao in solicitacoes">
+								<img src="img/cardifparaloko.png" alt="">
+								<div class="entry">
+									<strong><a href="">{{solicitacao.nome}}</a></strong>
+									<div class="rating">
+					                    <span class="active"><i class="fa fa-star"></i></span>
+					                    <span class="active"><i class="fa fa-star"></i></span>
+					                    <span class="active"><i class="fa fa-star"></i></span>
+					                    <span class="active"><i class="fa fa-star"></i></span>
+					                    <span class="active"><i class="fa fa-star"></i></span>
+					                </div>
+									<p>Atacante</p>
+								</div>
+							<button class="button active" ng-click="aceitar(solicitacao)">Aceitar</button>
+							<button class="button danger" ng-click="recusar(solicitacao)">Recusar</button>
+							</div>
+							</div>
+					</div>
+					<div id="description" class="col s12">
+						<p>
+						{{equipe.descricao}}</p>
+					</div>
+					<div id="review" class="review col s12">
+						<div class="comment">
+							
+							<div class="content" ng-repeat="(chaves ,jogador) in equipe.jogadores track by $index">
+								<img src="img/cardifparaloko.png" alt="">
+								<div class="entry">
+									<strong ng-repeat="(key ,dado) in jogador track by $index"><a href="">{{dado.nome}}</a></strong>
+									<div class="rating">
+					                    <span class="active"><i class="fa fa-star"></i></span>
+					                    <span class="active"><i class="fa fa-star"></i></span>
+					                    <span class="active"><i class="fa fa-star"></i></span>
+					                    <span class="active"><i class="fa fa-star"></i></span>
+					                    <span class="active"><i class="fa fa-star"></i></span>
+					                </div>
+									<p>Atacante</p>
+								</div>
+							</div>
+							
+							<div class="post-review">
+								<h6>Mensagem para o time</h6>
+								<form action="#">
+									<div class="input-field">
+										<input id="name" type="text" class="validate" placeholder="Nome">
+									</div>
+									<div class="input-field">
+										<input id="email" type="email" class="validate" placeholder="Email">
+									</div>
+									<div class="input-field">
+										<textarea cols="20" rows="10" id="comment" class="validate" placeholder="Mensagem"></textarea>
+									</div>
+									<button class="button">Enviar</button>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="desc-review" ng-if="equipe.manager_uid != usuario_logado.providerData[0].uid">
+				<div class="row">
+					<div class="col s12">
+						<ul class="tabs">
+						
+							<li class="tab col s6">
+								<a href="#description_player"><h5>Historico</h5></a>
+							</li>
+							<li class="tab col s6">
+								<a href="#review_player"><h5>Jogadores</h5></a>
+							</li>
+						</ul>
+					</div>
+	<div id="review_player" class="review col s12">
+						<div class="comment">
+							<div class="content">
+								<img src="img/cardifparaloko.png" alt="">
+								<div class="entry">
+									<strong><a href="">Paraloko</a></strong>
+									<div class="rating">
+					                    <span class="active"><i class="fa fa-star"></i></span>
+					                    <span class="active"><i class="fa fa-star"></i></span>
+					                    <span class="active"><i class="fa fa-star"></i></span>
+					                    <span class="active"><i class="fa fa-star"></i></span>
+					                    <span class="active"><i class="fa fa-star"></i></span>
+					                </div>
+									<p>Atacante</p>
+								</div>
+							</div>
+							
+							<div class="content">
+								<img src="img/cardifparaloko.png" alt="">
+								<div class="entry">
+									<strong><a href="">Paraloko</a></strong>
+									<div class="rating">
+					                    <span class="active"><i class="fa fa-star"></i></span>
+					                    <span class="active"><i class="fa fa-star"></i></span>
+					                    <span class="active"><i class="fa fa-star"></i></span>
+					                    <span class="active"><i class="fa fa-star"></i></span>
+					                    <span class="active"><i class="fa fa-star"></i></span>
+					                </div>
+									<p>Atacante</p>
+								</div>
+							</div>
+							<div class="content">
+								<img src="img/cardifcamisola.png" alt="">
+								<div class="entry">
+									<strong><a href="">Caldana</a></strong>
+									<div class="rating">
+					                    <span class="active"><i class="fa fa-star"></i></span>
+					                    <span class="active"><i class="fa fa-star"></i></span>
+					                    <span class="active"><i class="fa fa-star"></i></span>
+					                    <span class="active"><i class="fa fa-star"></i></span>
+					                    <span class="active"><i class="fa fa-star"></i></span>
+
+					                </div>
+									<p>Numero um do ranking nacional , lidera a equipe</p>
+								</div>
+							</div>
+							<div class="post-review">
+								<h6>Mensagem para o Manager do time</h6>
+								<form action="#">
+									<div class="input-field">
+										<input id="name_player" type="text" class="validate" placeholder="Nome">
+									</div>
+									<div class="input-field">
+										<input id="email_player" type="email" class="validate" placeholder="Email">
+									</div>
+									<div class="input-field">
+										<textarea cols="20" rows="10" id="comment_player" class="validate" placeholder="Mensagem"></textarea>
+									</div>
+									<button class="button">Enviar</button>
+								</form>
+							</div>
+						</div>
+					</div>
+					<div id="description_player" class="col s12">
+	
+					
+						<p>
+						{{equipe.descricao}}</p>
+					</div>
+				
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end product details -->
+	<script type="text/javascript">
+
+
+		$(function(){
+	'use-strict';
+
+	// sidenav control left
+	$(".sidenav-control").sideNav({
+		edge: 'left',
+		closeOnClick: false
+	});
+
+	// panel collapse icon
+	$(document).on("click",".collapsible-header",function(e){
+	    $(this).parent().siblings().find('span i').removeClass('fa-chevron-down')
+		$(this).find('span i').toggleClass('fa-chevron-down')
+	});
+
+
+	// faq collapse icon
+	$(document).on("click",".faq-collapsible",function(e){
+	    $(this).parent().siblings().find('i').removeClass('fa-minus')
+		$(this).find('i').toggleClass('fa-minus')
+	});
+
+	// testimonial
+	$("#testimonial").owlCarousel({
+      	slideSpeed : 300,
+      	paginationSpeed : 400,
+      	singleItem: true
+  	});
+
+	// tabs
+	$('ul.tabs').tabs(); 
+  
+
+});
+
+
+
+
+		function reload_tabs(){
+
+	
+
+				// tabs
+				$('ul.tabs').tabs(); 
+	
+			  
+
+		}
+		
+	</script>

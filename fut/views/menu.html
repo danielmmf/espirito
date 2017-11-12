@@ -1,0 +1,71 @@
+	<div class="panel-control-left">
+		<ul id="slide-out-left" class="side-nav collapsible"  data-collapsible="accordion">
+			<li>
+				<div class="photos">
+					<img ng-src="{{foto_logado}}" alt="{{nome_logado}}">
+					<h3>{{nome_logado}}</h3>
+				</div>
+			</li>
+			<li class="first-list">
+				<a href="index.php"  data-activates="slide-out-left" ><i class="fa fa-home"></i>Home</a>
+			</li>
+			<li>
+				<a href="/minha_pagina"  data-activates="slide-out-left"><i class="fa fa-question-circle"></i>Minha Pagina</a>
+			</li>
+			<li>
+				<a href="/jogador"  data-activates="slide-out-left"><i class="fa fa-question-circle"></i>Meu Jogador</a>
+			</li>
+			<li ng-show='logado'>
+				<div class="collapsible-header"><i class="fa fa-play"></i>Jogos <span><i class="fa fa-chevron-right"></i></span></div>
+				<div class="collapsible-body">
+					<ul class="side-nav-panel">
+						<li><a href="#">Proximos</a></li>
+						<li><a href="#">Historico</a></li>
+					</ul>
+				</div>
+			</li>
+			<li ng-show='logado'>
+				<div class="collapsible-header"><i class="fa fa-book"></i>Equipe <span><i class="fa fa-chevron-right"></i></span></div>
+				<div class="collapsible-body">
+					<ul class="side-nav-panel">
+						<li><a href="/minhas_equipes">Minhas equipes</a></li>
+						<li><a href="/equipes">Todas as equipes</a></li>
+						<li><a href="#">Jogadores</a></li>
+					</ul>
+				</div>
+			</li>
+			<li ng-show='logado'>
+				<div class="collapsible-header"><i class="fa fa-shopping-bag"></i>Mercado <span><i class="fa fa-chevron-right"></i></span></div>
+				<div class="collapsible-body">
+					<ul class="side-nav-panel">
+						<li><a href="#">Buscar jogadores</a></li>
+						<li><a href="#">Transferencias</a></li>
+					</ul>
+				</div>
+			</li>
+			<!--li ng-show='logado'>
+				<div class="collapsible-header"><i class="fa fa-rss"></i>Blog <span><i class="fa fa-chevron-right"></i></span></div>
+				<div class="collapsible-body">
+					<ul class="side-nav-panel">
+						<li><a href="#">Escrever</a></li>
+					</ul>
+				</div>
+			</li>
+			<li>
+				<a href="#"  data-activates="slide-out-left"><i class="fa fa-question-circle"></i>Faq</a>
+			</li-->
+
+			<li>
+				<a href="#"><i class="fa fa-envelope"></i>Contato</a>
+			</li>
+			<li ng-show='logado'>
+				<a href="#" ng-click="logoff()"><i class="fa fa-sign-in"></i>Logoff</a>
+			</li>
+			<li ng-hide=logado>
+				<a href="#" ng-click="login()"><i class="fa fa-sign-in"></i>Login</a>
+			</li>
+			<!--li>
+				<a href="register.html"><i class="fa fa-user-plus"></i>Registrar</a>
+			</li-->
+		</ul>
+	</div>
